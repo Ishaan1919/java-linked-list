@@ -6,14 +6,14 @@
 
 
 
-class Node{
+class StudentNode {
     String rollNumber;
     String name;
     int age;
     String grade;
-    Node next;
+    StudentNode next;
 
-    Node(String rollNumber, String name, int age, String grade){
+    StudentNode(String rollNumber, String name, int age, String grade){
         this.rollNumber = rollNumber;
         this.name = name;
         this.age = age;
@@ -22,63 +22,63 @@ class Node{
     }
 }
 
-class SinglyLinkedList {
-    Node head;
+class StudentSinglyLinkedList {
+    StudentNode head;
 
     void addAtBeginning(String rollNumber, String name, int age, String grade){
-        Node node = new Node(rollNumber, name, age, grade);
+        StudentNode studentNode = new StudentNode(rollNumber, name, age, grade);
         if(head == null){
-            head = node;
+            head = studentNode;
             return ;
         }
-        node.next = head;
-        head = node;
+        studentNode.next = head;
+        head = studentNode;
     }
 
-    void addAtBeginning(Node node){
+    void addAtBeginning(StudentNode studentNode){
         if(head == null){
-            head = node;
+            head = studentNode;
             return ;
         }
-        node.next = head;
-        head = node;
+        studentNode.next = head;
+        head = studentNode;
     }
 
     void addAtEnding(String rollNumber, String name, int age, String grade){
-        Node node = new Node(rollNumber, name, age, grade);
-        Node prev = null;
-        Node temp = head;
+        StudentNode studentNode = new StudentNode(rollNumber, name, age, grade);
+        StudentNode prev = null;
+        StudentNode temp = head;
         while(temp != null){
             prev = temp;
             temp = temp.next;
         }
         if(prev != null){
-            prev.next = node;
+            prev.next = studentNode;
         }
         else{
-            head = node;
+            head = studentNode;
         }
     }
 
     void addAtSpecificPosition(String rollNumber, String name, int age, String grade, int pos){
-        Node node = new Node(rollNumber, name, age, grade);
-        Node temp = head;
+        StudentNode studentNode = new StudentNode(rollNumber, name, age, grade);
+        StudentNode temp = head;
         if(pos==0){
-            addAtBeginning(node);
+            addAtBeginning(studentNode);
             return ;
         }
-        Node prev = null;
+        StudentNode prev = null;
         while(temp != null && pos-- > 0) {
             prev = temp;
             temp = temp.next;
         }
-        prev.next = node;
-        node.next = temp;
+        prev.next = studentNode;
+        studentNode.next = temp;
     }
 
     void deleteStudentRecordByRollNumber(String rollNumber){
-        Node temp = head;
-        Node prev = null;
+        StudentNode temp = head;
+        StudentNode prev = null;
         while(temp != null){
             if(rollNumber.equals(temp.rollNumber)){
                 if(prev == null){
@@ -97,8 +97,8 @@ class SinglyLinkedList {
         }
     }
 
-    Node searchStudentRecordByRollNumber(String rollNumber){
-        Node temp = head;
+    StudentNode searchStudentRecordByRollNumber(String rollNumber){
+        StudentNode temp = head;
         while(temp != null){
             if(rollNumber.equals(temp.rollNumber)){
                 return temp;
@@ -109,21 +109,21 @@ class SinglyLinkedList {
     }
 
     void upgradeStudentGradeByRollNumber(String rollNumber, String grade){
-        Node student = searchStudentRecordByRollNumber(rollNumber);
+        StudentNode student = searchStudentRecordByRollNumber(rollNumber);
         if(student != null){
             student.grade = grade;
         }
     }
 
-    void displayStudentRecords(Node node){
-        System.out.println("Name: " + node.name);
-        System.out.println("Roll Number: " + node.rollNumber);
-        System.out.println("Age: " + node.age);
-        System.out.println("Grade: " + node.grade);
+    void displayStudentRecords(StudentNode studentNode){
+        System.out.println("Name: " + studentNode.name);
+        System.out.println("Roll Number: " + studentNode.rollNumber);
+        System.out.println("Age: " + studentNode.age);
+        System.out.println("Grade: " + studentNode.grade);
     }
 
     void displayRecordsForAllStudents(){
-        Node temp = head;
+        StudentNode temp = head;
         while(temp != null){
             displayStudentRecords(temp);
             System.out.println("---------");
@@ -136,7 +136,7 @@ class SinglyLinkedList {
 
 public class StudentRecordManagement {
     public static void main(String[] args) {
-        SinglyLinkedList list = new SinglyLinkedList();
+        StudentSinglyLinkedList list = new StudentSinglyLinkedList();
 
         list.addAtEnding("101", "Alice", 20, "A");
         list.addAtBeginning("102", "Bob", 21, "B");
@@ -195,5 +195,6 @@ public class StudentRecordManagement {
 //        Age: 20
 //        Grade: A
 //                ---------
+
     }
 }
